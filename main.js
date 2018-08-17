@@ -1,28 +1,23 @@
-var todos = ['item1', 'item2', 'item3'];
-
-// It should have a function to display todos
-function displayTodos() {
-    console.log("My todos:", todos);
+// 
+var todoList = {
+    todos: ['item1', 'item2', 'item3'],
+    displayTodos: function() {
+        console.log('My todos', this.todos);
+    },
+    addTodos: function(todo) {
+        this.todos.push(todo);
+        this.displayTodos();
+    },
+    changeTodos: function(position, newValue) {
+        this.todos[position] = newValue;
+        this.displayTodos();
+    },
+    deliteTodos: function(position) {
+        this.todos.splice(position, 1);
+        this.displayTodos();
+    }
 };
-// displayTodos();
-// It should have a function to add todos
-function addTodos(todo) {
-    todos.push(todo);
-    displayTodos();
-};
-// addTodos("added item");
-// It should have a function to change todos
-function changeTodo(position, newValue) {
-    todos[position] = newValue;
-    displayTodos();
-};
-// changeTodo(2, 'item3-changed');
-
-// It should have a function to delete todos
-function deleteTodos(position) {
-    todos.splice(position, 1);
-    displayTodos();
-}
-
-deleteTodos(2);
-
+todoList.displayTodos();
+todoList.addTodos('adding item new');
+todoList.changeTodos(1, "changed");
+todoList.deliteTodos(0);
