@@ -2,7 +2,21 @@
 var todoList = {
     todos: [],
     displayTodos: function() {
-        console.log('My todos', this.todos);
+
+        if (this.todos.length === 0) {
+            console.log('Your todo list is empty');
+        } else {
+            console.log('My todos');
+            for (var i = 0; i < this.todos.length; i++) {
+                if( this.todos[i].complited === true ) {
+                    console.log('(x)', this.todos[i].todoText);
+                } else {
+                    console.log('( )',this.todos[i].todoText);
+                }
+            }
+        }
+
+
     },
     addTodo: function(todoText) {
         this.todos.push({
@@ -29,5 +43,11 @@ var todoList = {
 // todoList.addTodos('adding item object');
 // todoList.changeTodos(1, "changed");
 // todoList.deliteTodos(0);
-todoList.addTodo("boolian testing");
+
+todoList.addTodo("first");
+todoList.addTodo("second");
+todoList.addTodo("third");
+
+todoList.toggleComplited(1);
+todoList.toggleComplited(1);
 todoList.toggleComplited(0);
