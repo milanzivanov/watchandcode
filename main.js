@@ -11,11 +11,11 @@ var todoList = {
         });
         this.displayTodos();
     },
-    changeTodos: function(position, todoText) {
-        this.addTodos[position].todoText = todoText;
+    changeTodo: function(position, todoText) {
+        this.todos[position].todoText = todoText;
         this.displayTodos();
     },
-    deliteTodos: function(position) {
+    deliteTodo: function(position) {
         this.todos.splice(position, 1);
         this.displayTodos();
     },
