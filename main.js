@@ -63,6 +63,20 @@ var todoList = {
         this.displayTodos();
     }
 };
+
+
+var displayTodosButton = document.getElementById("displayTodosButton");
+var toggleAllButton = document.getElementById('toggleAllButton');
+
+displayTodosButton.addEventListener('click', function() {
+    todoList.displayTodos();
+});
+
+toggleAllButton.addEventListener('click', function() {
+    todoList.toggleAll();
+});
+
+
 // todoList.addTodos('adding item object');
 // todoList.changeTodos(1, "changed");
 // todoList.deliteTodos(0);
@@ -70,7 +84,7 @@ var todoList = {
 todoList.addTodo("first");
 todoList.addTodo("second");
 
-todoList.toggleAll();
+// todoList.toggleAll();
 
-todoList.toggleComplited(0);
-todoList.toggleComplited(1);
+// todoList.toggleComplited(0);
+// todoList.toggleComplited(1);
