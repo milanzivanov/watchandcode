@@ -66,11 +66,8 @@ var handlers = {
 
         view.displayTodos();
     },
-    deliteTodo: function() {
-        var deliteTodoPositionInput = document.getElementById("deliteTodoPositionInput");
-        todoList.deliteTodo(deliteTodoPositionInput.valueAsNumber);
-        deliteTodoPositionInput = "";
-
+    deliteTodo: function(position) {
+        todoList.deliteTodo(position);
         view.displayTodos();
     },
     toggleComplited: function() {
@@ -104,10 +101,44 @@ var view = {
                 todoTextWithCompletion = "( ) " + todo.todoText;
             }
 
+            // add id for all
+            todoLi.id = i;
+
             todoLi.textContent = todoTextWithCompletion;
             // todoLi.textContent = todoList.todos[i].todoText;
+
+            // adding btn to the dom
+            todoLi.appendChild(this.createDeliteButton());
+
             todosUl.appendChild(todoLi);
         }
 
+    },
+    // create delite btn
+    createDeliteButton: function () {
+        var deliteButton = document.createElement("button");
+        deliteButton.textContent = "Delite";
+        deliteButton.className = "deliteButton";
+        return deliteButton;
+    },
+
+    setUpEventListeners: function() {
+        var todosUl = document.querySelector("ul");
+        todosUl.addEventListener('click', function(event) {
+            console.log(event.target.parentNode.id);
+        
+            // get the element that is cliced on
+            var elementClicked = event.target;
+        
+            // check if elementClicked is a delite button
+            if (elementClicked.className === 'deliteButton') {
+                handlers.deliteTodo(parseInt(elementClicked.parentNode.id));
+                
+            }
+        });
     }
+
 };
+
+view.setUpEventListeners();
+
