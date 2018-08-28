@@ -22,29 +22,57 @@ var todoList = {
         var todo = this.todos[position];
         todo.complited = !todo.complited;
     },
+    // 11
     toggleAll: function() {
         // debugger;
         var totalTodos = this.todos.length;
         var complitedTodos = 0;
 
         // get number of complited todos
-        for(var i = 0; i < totalTodos; i++) {
-            if( this.todos[i].complited === true ) {
+
+        // for(var i = 0; i < totalTodos; i++) {
+        //     if( this.todos[i].complited === true ) {
+        //         complitedTodos++;
+        //     }
+        // }
+
+        this.todos.forEach(function(todo) {
+            if( todo.complited === true ) {
                 complitedTodos++;
             }
-        }
+        });
+
+        // same 111
         // Case1: if everything true, make everything false 
-        if (complitedTodos === totalTodos) {
-            for(var i = 0; i < totalTodos; i++) {
-                this.todos[i].complited = false;
+        // if (complitedTodos === totalTodos) {
+        //     // for(var i = 0; i < totalTodos; i++) {
+        //     //    this.todos[i].complited = false;
+        //     // }
+        //     this.todos.forEach(function(todo) {
+        //         todo.complited = false;
+        //     });
+        // }
+        // // case2: otherwisemake everything true
+        // else {
+        //     // for(var i = 0; i < totalTodos; i++) {
+        //     //     this.todos[i].complited = true;
+        //     // }
+        //     this.todos.forEach(function(todo) {
+        //         todo.complited = true;
+        //     });
+        // }
+
+        // same but better way 111
+        this.todos.forEach(function(todo) {
+            // Case1: if everything true, make everything false
+            if (complitedTodos === totalTodos) {
+                todo.complited = false;
+            } 
+            // case2: otherwisemake everything true
+            else {
+                todo.complited = true;
             }
-        } 
-        // case2: otherwisemake everything true
-        else {
-            for(var i = 0; i < totalTodos; i++) {
-                this.todos[i].complited = true;
-            }
-        }
+        });
     }
 };
 
@@ -90,11 +118,13 @@ var view = {
         var todosUl = document.querySelector("ul");
         todosUl.innerHTML = '';
 
-        for (var i = 0; i < todoList.todos.length; i++) {
-            var todoLi = document.createElement("li");
-            var todo = todoList.todos[i];
-            var todoTextWithCompletion = "";
+        // objasnjenje
+        // this // refers to the view object
+        // forEach(callback, this)
 
+        todoList.todos.forEach(function(todo, position) {
+            var todoLi = document.createElement("li");
+            var todoTextWithCompletion = "";
             if (todo.complited === true) {
                 todoTextWithCompletion = "(X) " + todo.todoText;
             } else {
@@ -102,16 +132,12 @@ var view = {
             }
 
             // add id for all
-            todoLi.id = i;
-
+            todoLi.id = position;
             todoLi.textContent = todoTextWithCompletion;
-            // todoLi.textContent = todoList.todos[i].todoText;
-
             // adding btn to the dom
             todoLi.appendChild(this.createDeliteButton());
-
             todosUl.appendChild(todoLi);
-        }
+        }, this);
 
     },
     // create delite btn
